@@ -16,7 +16,6 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
-  user-select: none;
 }
 
 .hexagons {
@@ -59,6 +58,7 @@
 .piece {
   position: absolute;
   cursor: pointer;
+  user-select: none;
 }
 .piece[data-state="2"],
 .piece[data-state="4"] {
