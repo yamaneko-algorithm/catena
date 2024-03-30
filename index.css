@@ -130,6 +130,6 @@
   .board {
     width: 100vmin;
     height: 100vmin;
-    margin: calc((100vh - 100vmin) / 2) auto;
+    margin: calc((100vh - 100vmin - 50px) / 2) auto;
   }
 }
