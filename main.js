@@ -83,7 +83,7 @@ function movePiece([index, [x, y]]) {
 
 function cpu() {
   // const action = state.randomAction();
-  const action = alphabetaAction(state, 4);
+  const action = alphabetaAction(state, 5);
   movePiece(action);
   (state.isLose()) ? fin() : playerFlag = true;
 }
@@ -91,6 +91,15 @@ function cpu() {
 function fin() {
 
 }
+
+// toggle menu
+window.addEventListener('load', function () {
+  let button = document.querySelector('.toggle-menu-button');
+  let menu = document.querySelector('.header-site-menu');
+  button.addEventListener('click', function () {
+    menu.classList.toggle('is-show');
+  });
+});
 
 const startTime = Date.now(); // 開始時間
 const endTime = Date.now(); // 終了時間

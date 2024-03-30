@@ -9,7 +9,7 @@
 }
 
 body {
-  user-select: none;
+	user-select: none;
   -webkit-tap-highlight-color: transparent;  /* タップしても暗くならない */
 }
 
@@ -21,8 +21,6 @@ body {
   display: flex;
   flex-flow: column;
   justify-content: center;
-  -webkit-touch-callout: none;
-  user-select: none;  /* 追加 */
 }
 
 .hexagons {
