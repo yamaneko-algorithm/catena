@@ -29,6 +29,7 @@ body {
 img {
   max-width: 100%;
   -webkit-touch-callout: none;  /* 追加 */
+  user-select: none;
 }
 
 .header-inner {
