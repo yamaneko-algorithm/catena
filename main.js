@@ -79,6 +79,7 @@ function movePiece([index, [x, y]]) {
   document.getElementById(`${x}-${y}-piece`).dataset.state = piece.dataset.state;
   piece.dataset.state = "";
   state = state.next([index, [x, y]]);
+  document.querySelector('.turn').textContent = `${state.turn+1} turn`;
 }
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
