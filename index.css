@@ -134,6 +134,7 @@ body {
   .board {
     width: 100vmin;
     height: 100vmin;
+    margin: calc((100vh - 100vmin - 50px) / 2) auto;  /* safari以外 */
     margin: calc((100dvh - 100vmin - 50px) / 2) auto;
   }
 }
