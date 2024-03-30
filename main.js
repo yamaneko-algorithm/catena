@@ -81,7 +81,10 @@ function movePiece([index, [x, y]]) {
   state = state.next([index, [x, y]]);
 }
 
-function cpu() {
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function cpu() {
+  await sleep(1000);
   // const action = state.randomAction();
   const action = alphabetaAction(state, 5);
   movePiece(action);
