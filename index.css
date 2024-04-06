@@ -34,7 +34,6 @@ body {
   margin: auto 8px 2px auto;
   font-family: "Montserrat", sans-serif;
   font-size: 30px;
-  user-select: none;
 }
 
 .board {
@@ -72,6 +71,12 @@ body {
 	height: 96%;
 	background-color: #fff;
 	clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.hexagon.move-mass::after {
+  /* animation: flash 1s linear infinite; */
+  background-color: rgb(253, 224, 170);
+  cursor: pointer;
 }
 
 .gray::after {
@@ -141,15 +146,24 @@ body {
 .piece[data-state="3"]::before,
 .piece[data-state="3"]::after {
   background-color: blue;
-  /* animation: flashh 1s linear infinite; */
 }
 
-@keyframes flashh {
+.piece[data-state="5"] {
+  inset: 0;
+  margin: auto;
+  z-index: 1;
+  width: 16%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: red
+}
+
+@keyframes flash {
   0%,100% {
     opacity: 1;
   }
   50% {
-    background-color: rgb(116, 116, 248);
+    background-color: rgb(253, 224, 170);
   }
 }
 

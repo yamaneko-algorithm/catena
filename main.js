@@ -63,15 +63,38 @@ for (let i = 0; i < 7; i++) {
 function onClick([x, y]) {
   if (playerFlag) {
     if (myIndex(state.pieces, [x, y]) >= 0) {
-      selectedIndex = myIndex(state.pieces, [x, y]);
+      if (selectedIndex >= 0){
+        if (selectedIndex == myIndex(state.pieces, [x, y])) {
+          toggleMoveMass();  // remove
+          selectedIndex = -1;
+        }
+        else {
+          toggleMoveMass();  // remove
+          selectedIndex = myIndex(state.pieces, [x, y]);
+          toggleMoveMass();  // add
+        }
+      }
+      else {
+        selectedIndex = myIndex(state.pieces, [x, y]);
+        toggleMoveMass();  // add
+      }
     }
     else if (myIncludes(state.legalActions(), [selectedIndex, [x, y]])) {
+      toggleMoveMass();  // remove
       movePiece([selectedIndex, [x, y]]);
       playerFlag = false;
       selectedIndex = -1;
       (state.isLose()) ? fin() : cpu();
     }
   }
+}
+
+function toggleMoveMass() {
+  state.legalActions().forEach(action => {
+    if (action[0] == selectedIndex) {
+      document.getElementById(`${action[1][0]}-${action[1][1]}-hexagon`).classList.toggle("move-mass");
+    }
+  })
 }
 
 function movePiece([index, [x, y]]) {
@@ -85,7 +108,7 @@ function movePiece([index, [x, y]]) {
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function cpu() {
-  await sleep(1000);
+  await sleep(1000);  // 1sプログラム停止
   // const action = state.randomAction();
   const action = alphabetaAction(state, 5);
   movePiece(action);
@@ -93,10 +116,10 @@ async function cpu() {
 }
 
 function fin() {
-
+  
 }
 
-// toggle menu
+// ハンバーガーメニュー
 window.addEventListener('load', function () {
   let button = document.querySelector('.toggle-menu-button');
   let menu = document.querySelector('.header-site-menu');
