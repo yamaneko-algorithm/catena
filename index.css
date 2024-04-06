@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+html {
+  touch-action: manipulation;  /* ダブルタップ禁止 */
+}
+
 body {
 	user-select: none;
   -webkit-tap-highlight-color: transparent;  /* タップしても暗くならない */
