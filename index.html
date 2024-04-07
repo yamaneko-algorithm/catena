@@ -36,10 +36,25 @@
   <main class="main">
     <div class="menu-board">
       <div class="top-menu">
+        <div class="sengo">
+          <input type="radio" class="sengo-" name="sengo" value="1" checked>先手
+          <input type="radio" class="sengo-" name="sengo" value="2">後手
+        </div>
+        <div class="level">
+          CPUレベル
+          <input type="radio" name="level" value="1" checked>1
+          <input type="radio" name="level" value="2">2
+          <input type="radio" name="level" value="3">3
+          <input type="radio" name="level" value="4">4
+          <input type="radio" name="level" value="5">5
+        </div>
         <div class="turn">1 turn</div>
       </div>
       <div class="board" id="board"></div>
-      <div class="bottom-menu"></div>
+      <div class="bottom-menu">
+        <div class="play">PLAY</div>
+        <div class="reset">RESET</div>
+      </div>
     </div>
     <!-- テンプレート -->
     <div class="hexagons" id="hexagons-template"></div>

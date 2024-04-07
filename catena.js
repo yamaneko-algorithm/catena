@@ -198,7 +198,6 @@ export class State {
       }
       board[this.enemy_pieces[i][0]][this.enemy_pieces[i][1]] = 5;
     }
-
     for (let i = 1; i < 10; i++) {
       for (let j = 1; j < 10; j++) {
         if (board[i][j] > 8) {
@@ -207,6 +206,68 @@ export class State {
       }
     }
     return areaNum + 4*checkNum + Math.floor(Math.random()*5);
+  }
+
+  // 王様iの[x,y]までのログを表示
+  log([i, [x, y]]) {
+    let board = this.makeBoard();
+    let stk = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let parentChild = {};
+    let parent, current, next_x, next_y, next;
+    stk[0] = this.pieces[i];
+    board[this.pieces[i][0]][this.pieces[i][1]] = i+10;
+    let stk_num = 1
+    // 深さ優先探索
+    while (stk_num > 0) {
+      stk_num -= 1;
+      parent = stk[stk_num];
+      this.dxy.forEach(dxy => {
+        current = parent;
+        while (true) {
+          next_x = current[0] + dxy[0];
+          next_y = current[1] + dxy[1];
+          next = board[next_x][next_y];
+          if (next == i+10) {  // ノードの重複を避ける
+            break;
+          }
+          else if (next == 5) {  // タッチできる場合は後書きされるよう注意
+            parentChild[current] = parent;
+            board[current[0]][current[1]] = i + 20;
+            break;
+          }
+          else if (next == 1 || next == 2 || next == 6) {
+            if (current != parent) {
+              if (board[current[0]][current[1]] != i+20) {
+                parentChild[current] = parent;
+                board[current[0]][current[1]] = i + 20;
+              }
+            }
+            break;
+          }
+          else if (next == 3 || next == 4) {
+            if (current != parent) {
+              if (board[current[0][current[1]]] != i+20) {
+                parentChild[current] = parent;
+              }
+              board[current[0]][current[1]] = i+10;
+              stk[stk_num] = current;
+              stk_num += 1;
+            }
+            break;
+          }
+          else {
+            current = [next_x, next_y];
+          }
+        }
+      })
+    }
+    let stopMass = [x, y];
+    let log = [];
+    while (stopMass) {
+      log.push(stopMass);
+      stopMass  = parentChild[stopMass];
+    }
+    return log.reverse();
   }
 
 }

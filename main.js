@@ -20,6 +20,12 @@ function myIncludes(arr, [index, [x, y]]) {
   return false;
 }
 
+let state = new State();
+let playFlag = false; 
+let playerFlag = false;
+let selectedIndex = -1;
+let level = null;
+
 // 盤面の作成
 function createBoard() {
   const board = document.getElementById("board");
@@ -47,18 +53,65 @@ function createBoard() {
     }
     board.appendChild(hexagons);
   }
+  for (let i = 0; i < 7; i++) {
+    document.getElementById(`${state.pieces[i][0]}-${state.pieces[i][1]}-piece`).dataset.state = (i < 3) ? 1 : 2;
+    document.getElementById(`${state.enemy_pieces[i][0]}-${state.enemy_pieces[i][1]}-piece`).dataset.state = (i < 3) ? 3 : 4;
+  }
 }
 
 createBoard();
 
-let state = new State();
-let playerFlag = true;
-let selectedIndex = -1;
-
-for (let i = 0; i < 7; i++) {
-  document.getElementById(`${state.pieces[i][0]}-${state.pieces[i][1]}-piece`).dataset.state = (i < 3) ? 1 : 2;
-  document.getElementById(`${state.enemy_pieces[i][0]}-${state.enemy_pieces[i][1]}-piece`).dataset.state = (i < 3) ? 3 : 4;
-}
+window.addEventListener('load', function () {
+  // PLAY button
+  let play = document.querySelector('.play');
+  play.addEventListener('click', function () {
+    if (!playFlag) {
+      let sengo;
+      let sengoArr = document.getElementsByName('sengo');
+      for (let i = 0; i < sengoArr.length; i++) {
+        if (sengoArr.item(i).checked) {
+          sengo = sengoArr.item(i).value;
+        }
+      }
+      let levelArr = document.getElementsByName('level');
+      for (let i = 0; i < levelArr.length; i++) {
+        if (levelArr.item(i).checked) {
+          level = levelArr.item(i).value;
+        }
+      }
+      if (sengo == 1) {
+        playerFlag = true;
+      }
+      else {
+        state = new State(state.enemy_pieces, state.pieces, 1);  // 謎仕様
+        state.turn -= 1; 
+        cpu();
+      }
+      playFlag = true;
+    }
+  });
+  // RESET button
+  let reset = this.document.querySelector('.reset');
+  reset.addEventListener('click', function () {
+    for (let i = 0; i < 7; i++) {
+      document.getElementById(`${state.pieces[i][0]}-${state.pieces[i][1]}-piece`).dataset.state = '';
+      document.getElementById(`${state.enemy_pieces[i][0]}-${state.enemy_pieces[i][1]}-piece`).dataset.state = '';
+    }
+    state = new State();
+    document.querySelector('.turn').textContent = `1 turn`;
+    for (let i = 0; i < 7; i++) {
+      document.getElementById(`${state.pieces[i][0]}-${state.pieces[i][1]}-piece`).dataset.state = (i < 3) ? 1 : 2;
+      document.getElementById(`${state.enemy_pieces[i][0]}-${state.enemy_pieces[i][1]}-piece`).dataset.state = (i < 3) ? 3 : 4;
+    }
+    playFlag = false;
+  });
+  // Hamburger menu
+  let button = document.querySelector('.toggle-menu-button');
+  let menu = document.querySelector('.header-site-menu');
+  button.addEventListener('click', function () {
+    menu.classList.toggle('is-show');
+  });
+});
 
 function onClick([x, y]) {
   if (playerFlag) {
@@ -98,6 +151,9 @@ function toggleMoveMass() {
 }
 
 function movePiece([index, [x, y]]) {
+  // if (index < 3) {
+  //   console.log(state.log([index, [x, y]]));
+  // }
   const piece = document.getElementById(`${state.pieces[index][0]}-${state.pieces[index][1]}-piece`);
   document.getElementById(`${x}-${y}-piece`).dataset.state = piece.dataset.state;
   piece.dataset.state = "";
@@ -110,7 +166,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function cpu() {
   await sleep(1000);  // 1sプログラム停止
   // const action = state.randomAction();
-  const action = alphabetaAction(state, 5);
+  const action = alphabetaAction(state, level);
   movePiece(action);
   (state.isLose()) ? fin() : playerFlag = true;
 }
@@ -118,15 +174,6 @@ async function cpu() {
 function fin() {
   
 }
-
-// ハンバーガーメニュー
-window.addEventListener('load', function () {
-  let button = document.querySelector('.toggle-menu-button');
-  let menu = document.querySelector('.header-site-menu');
-  button.addEventListener('click', function () {
-    menu.classList.toggle('is-show');
-  });
-});
 
 const startTime = Date.now(); // 開始時間
 const endTime = Date.now(); // 終了時間
