@@ -24,7 +24,7 @@ let state = new State();
 let playFlag = false; 
 let playerFlag = false;
 let selectedIndex = -1;
-let level = null;
+let level, sengo;
 
 // 盤面の作成
 function createBoard() {
@@ -66,7 +66,6 @@ window.addEventListener('load', function () {
   let play = document.querySelector('.play');
   play.addEventListener('click', function () {
     if (!playFlag) {
-      let sengo;
       let sengoArr = document.getElementsByName('sengo');
       for (let i = 0; i < sengoArr.length; i++) {
         if (sengoArr.item(i).checked) {
@@ -91,8 +90,9 @@ window.addEventListener('load', function () {
     }
   });
   // RESET button
-  let reset = this.document.querySelector('.reset');
+  let reset = document.querySelector('.reset');
   reset.addEventListener('click', function () {
+    document.querySelector('.fin').style.display = "none";
     for (let i = 0; i < 7; i++) {
       document.getElementById(`${state.pieces[i][0]}-${state.pieces[i][1]}-piece`).dataset.state = '';
       document.getElementById(`${state.enemy_pieces[i][0]}-${state.enemy_pieces[i][1]}-piece`).dataset.state = '';
@@ -104,6 +104,10 @@ window.addEventListener('load', function () {
       document.getElementById(`${state.enemy_pieces[i][0]}-${state.enemy_pieces[i][1]}-piece`).dataset.state = (i < 3) ? 3 : 4;
     }
     playFlag = false;
+  });
+  // Close botton
+  document.querySelector('.close-btn').addEventListener('click', function () {
+    document.querySelector('.fin').style.display = "none";
   });
   // Hamburger menu
   let button = document.querySelector('.toggle-menu-button');
@@ -172,7 +176,8 @@ async function cpu() {
 }
 
 function fin() {
-  
+  document.querySelector('.fin').style.display = "block";
+  document.querySelector('.winner').textContent = ((state.turn+1)%2 == sengo-1) ? "YOU WIN!" : "CPU WIN";
 }
 
 const startTime = Date.now(); // 開始時間
