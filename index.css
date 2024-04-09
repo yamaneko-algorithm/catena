@@ -38,11 +38,50 @@ body {
   font-size: 20px;
 }
 
+/* ★レベル */
 .level {
   margin-top: auto;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   margin-left: 20px;
   font-size: 20px;
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+.hidden-visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.level-label {
+  cursor: pointer;
+  color: gray;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.level-icon::before {
+  content: "★";
+  font-size: 24px;
+}
+
+.level-input:hover ~ .level-label {
+  color: lightgray;
+}
+
+.level-input:checked ~ .level-label {
+  color: #ffbb00;
+}
+
+.cpu-lv {
+  margin: auto 2px 3px 0;
 }
 
 .turn {
@@ -53,6 +92,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .play,
 .reset {
   width: 150px;
@@ -112,10 +152,12 @@ body {
   display: none;
 }
 
+/* コマの描画 */
 .piece {
   position: absolute;
   cursor: pointer;
 }
+
 .piece[data-state="2"],
 .piece[data-state="4"] {
   inset: 0;
@@ -126,6 +168,7 @@ body {
   border-radius: 50%;
   background-color: red;
 }
+
 .piece[data-state="1"],
 .piece[data-state="3"] {
   top: 0;
@@ -138,6 +181,7 @@ body {
   border-radius: 50%;
   background-color: red;
 }
+
 .piece[data-state="1"]::before,
 .piece[data-state="3"]::before {
   content: '';
@@ -151,6 +195,7 @@ body {
   border-radius: 50%;
   background-color: red;
 }
+
 .piece[data-state="1"]::after,
 .piece[data-state="3"]::after {
   content: '';
@@ -165,6 +210,7 @@ body {
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   background-color: red;
 }
+
 .piece[data-state="4"],
 .piece[data-state="3"],
 .piece[data-state="3"]::before,
@@ -189,6 +235,7 @@ body {
   z-index: 2;
   display: none;
 }
+
 .close-btn {
   position: absolute;
   top: 0;
@@ -200,6 +247,7 @@ body {
   background-color: red;
   cursor: pointer;
 }
+
 .close-btn::before,
 .close-btn::after {
   content: "";
@@ -210,21 +258,23 @@ body {
   height: 16px;
   background-color: #fff;
 }
+
 .close-btn::before {
   transform: translate(-50%,-50%) rotate(45deg);
 }
+
 .close-btn::after {
   transform: translate(-50%,-50%) rotate(-45deg);
 }
 
-@keyframes flash {
+/* @keyframes flash {
   0%,100% {
     opacity: 1;
   }
   50% {
     background-color: rgb(253, 224, 170);
   }
-}
+} */
 
 @media (max-width: 700px) {
   .menu-board {
@@ -242,6 +292,15 @@ body {
     margin-left: 12px;
   }
 
+  .level-icon::before {
+    font-size: 16px;
+  }
+
+  .level-label {
+    padding-left: 1px;
+    padding-right: 1px;
+  }
+
   .top-menu,
   .bottom-menu {
     font-size: 20px;
@@ -251,5 +310,4 @@ body {
   .reset {
     width: 100px;
   }
-
 }
