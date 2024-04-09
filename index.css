@@ -41,7 +41,6 @@ body {
 /* ★レベル */
 .level {
   margin-top: auto;
-  margin-bottom: 1px;
   margin-left: 20px;
   font-size: 20px;
   display: inline-flex;
@@ -81,7 +80,7 @@ body {
 }
 
 .cpu-lv {
-  margin: auto 2px 3px 0;
+  margin: auto 2px 4px 0;
 }
 
 .turn {
