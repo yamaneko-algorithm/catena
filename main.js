@@ -86,6 +86,7 @@ window.addEventListener('load', function () {
         state.turn -= 1; 
         cpu();
       }
+      document.querySelector('.top-menu').style.pointerEvents = "none";
       playFlag = true;
     }
   });
@@ -103,6 +104,7 @@ window.addEventListener('load', function () {
       document.getElementById(`${state.pieces[i][0]}-${state.pieces[i][1]}-piece`).dataset.state = (i < 3) ? 1 : 2;
       document.getElementById(`${state.enemy_pieces[i][0]}-${state.enemy_pieces[i][1]}-piece`).dataset.state = (i < 3) ? 3 : 4;
     }
+    document.querySelector('.top-menu').style.pointerEvents = "auto";
     playFlag = false;
   });
   // Close botton
