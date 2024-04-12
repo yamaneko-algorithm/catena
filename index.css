@@ -17,6 +17,10 @@ body {
   -webkit-tap-highlight-color: transparent;  /* タップしても暗くならない */
 }
 
+.mark_yellow {
+  background: linear-gradient(transparent 60%, #ffff00 0%);
+}
+
 .menu-board {
   width: 700px;
   margin: calc((100vh - 800px) / 2) auto;
@@ -36,6 +40,13 @@ body {
   margin-bottom: 2px;
   margin-left: 8px;
   font-size: 20px;
+}
+
+.sengo-::before{
+  border: 1px solid #2196f3;
+}
+.sengo-::after{
+  background-color: #2196f3;
 }
 
 /* ★レベル */

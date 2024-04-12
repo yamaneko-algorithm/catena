@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CATENA</title>
+  <meta name="discription" content="ボードゲームサークル「やまねこアルゴリズム」考案の2人対戦ボードゲーム『CATENA』のホームページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  <!--ズーム禁止 -->
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="header.css">
+  <script src="main.js" type="module" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="header-logo" href="./index.html">CATENA</a>
+      <button class="toggle-menu-button"></button>
+      <div class="header-site-menu">
+        <nav class="site-menu">
+          <ul>
+            <li><a href="./index.html">RULE</a></li>
+            <li><a href="./index.html">BUY</a></li>
+            <li><a href="./index.html">PLAY</a></li>
+            <li><a href="./index.html">CONTACT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main style="margin-left: 20px; margin-right: 20px;">
+    <p>『CATENA』は将棋やチェスのような相手の王様の捕獲を目的とした2人対戦のボードゲームです。</p>
+    <br>
+    <h2>コンポーネント</h2>
+    <p>王様（ポーンの形）3つ、石4つを赤青2セット、六角形ボード1つ</p>
+    <br>
+    <h2>ゲームの準備</h2>
+    <p>あなたは赤色、CPUは青色です。先後とCPUレベルを決めてPLAYを押してゲームスタートします。</p>
+    <br>
+    <h2>ゲームの流れ</h2>
+    <p>お互い交互に自分の駒をいずれか1つ動かしていきます。</p>
+    <br>
+    <h2>駒の動き</h2>
+      <h3>王様</h3>
+      <p>動けるマスは白い六角形のマスのみです。好きな方向を選んで、障害物（自分の王様、自分の石、相手の王様、相手の石、壁）にぶつかるまで真っ直ぐ進めます。<strong class="mark_yellow">自分の石または自分の他の王様にぶつかったら連続して動かす</strong>ことができます(動かさなくてもよいです)。</p>
+      <h3>石</h3>
+      <p>白とグレーのすべてのマスを動けます。好きな方向を選んで、障害物がなければ1マスだけ進むことができます。</p>
+      <br>
+    <h2>勝利条件</h2>
+    <p><strong class="mark_yellow">自分の王様が相手の王様にぶつかることができれば勝利です!</strong></p>
+    <br>
+    <h2>補足(千日手)</h2>
+    <p>「千日手」については将棋と同様のルールとします。ただCPU戦では未実装です。</p>
+  </main>
+
+  <footer class="footer">
+  </footer>
+
+</body>
+
+</html>
