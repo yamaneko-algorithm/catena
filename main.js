@@ -111,12 +111,6 @@ window.addEventListener('load', function () {
   document.querySelector('.close-btn').addEventListener('click', function () {
     document.querySelector('.fin').style.display = "none";
   });
-  // Hamburger menu
-  let button = document.querySelector('.toggle-menu-button');
-  let menu = document.querySelector('.header-site-menu');
-  button.addEventListener('click', function () {
-    menu.classList.toggle('is-show');
-  });
 });
 
 function onClick([x, y]) {
