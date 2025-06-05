@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  <!--ズーム禁止 -->
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="header.css">
+  <script src="modal.js" defer></script>
   <script src="main.js" type="module" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +24,7 @@
       <div class="header-site-menu">
         <nav class="site-menu">
           <ul>
-            <li><a href="./rule.html">RULE</a></li>
+            <li><a href="./index.html">RULE</a></li>
             <li><a href="./index.html">BUY</a></li>
             <li><a href="./index.html">PLAY</a></li>
             <li><a href="./index.html">CONTACT</a></li>
@@ -34,6 +35,40 @@
   </header>
 
   <main class="main">
+    <div class="center-box">
+      <p>オリジナルボードゲーム『CATENA』が遊べるサイトです</p>
+      <button id="openModal">＋ルールをみる</button>
+    </div>
+    <!-- モーダル -->
+    <div id="ruleModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" class="close-button">&times;</span>
+        <p>『CATENA』は将棋やチェスのように相手の王様の捕獲を目的とした2人対戦のボードゲームです。</p>
+        <h4>【遊び方】</h4>
+        <ul style="list-style-type: disc; padding-left: 1.5em;">
+          <li>あなたは赤色、CPUは青色です。</li>
+          <li>先後とCPUレベルを選び「PLAY」を押してゲームを始めます。</li>
+          <li>やり直したくなったり、ゲームが終了した場合は「RESET」を押し、上に戻ります。</li>
+        </ul>
+        <h4>【コンポーネント】</h4>
+        <p>王様3つ・石4つ×赤青2セット＋六角形ボード1つ</p>
+        <h4>【ゲームの流れ】</h4>
+        <p>お互い交互に自分のコマを1つ動かします。</p>
+        <h4>【石の動き】</h4>
+        <ul style="list-style-type: disc; padding-left: 1.5em;">
+          <li>白とグレーのすべてのマスを動けます。</li>
+          <li>好きな方向を選んで、障害物がなければ1マス進むことができます。</li>
+        </ul>
+        <h4>【王様の動き】</h4>
+        <ul style="list-style-type: disc; padding-left: 1.5em;">
+          <li>白いマスのみ動けます。</li>
+          <li>好きな方向を選んで、障害物（自分・相手の王様・石、壁）にぶつかるまで真っ直ぐ進みます。</li>
+          <li>自分の王様・石にぶつかった場合、連続して動かすことができます。（動かさなくてもよいです）</li>
+        </ul>
+        <h4>【勝利条件】</h4>
+        <p>自分の王様がどれか一つ相手の王様にぶつかることができれば勝利です！</p>
+      </div>
+    </div>
     <div class="menu-board">
       <div class="top-menu">
         <div class="sengo">
