@@ -22,3 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// Hamburger menu
+let button = document.querySelector('.toggle-menu-button');
+let menu = document.querySelector('.header-site-menu');
+button.addEventListener('click', function () {
+  menu.classList.toggle('is-show');
+});
