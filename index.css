@@ -68,7 +68,7 @@ h4 {
 .modal-content {
   background-color: white;
   margin: 10% auto;
-  padding: 35px 15px;
+  padding: 30px 15px;
   border-radius: 10px;
   width: 90%;
   max-width: 750px;
@@ -402,6 +402,15 @@ h4 {
     margin-top: 5px;
     padding: 3px 8px;
     font-size: 14px;
+  }
+
+  .close-button {
+    top: 0px;
+    right: 5px;
+  }
+
+  h4 {
+    margin-top: 5px;
   }
 
   h4, p, ul, ol {
