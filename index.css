@@ -375,6 +375,7 @@ h4 {
 @media (max-width: 700px) {
 
   .center-box {
+    margin-top: 5px;
     position: absolute;
     width: 100vw;
     z-index: 2;
