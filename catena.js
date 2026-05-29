@@ -1,11 +1,8 @@
-'use strict'
-
-const MAX_TURN = 100  // 100ターンで引き分け
-const OUTPUT_SIZE = 3*61 + 4*6  // 207
+'use strict';
 
 function myIncludes(arr, [index, [x, y]]) {
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i][0] == index && arr[i][1][0] == x && arr[i][1][1] == y) {
+    if (arr[i][0] === index && arr[i][1][0] === x && arr[i][1][1] === y) {
       return true;
     }
   }
@@ -14,7 +11,7 @@ function myIncludes(arr, [index, [x, y]]) {
 
 export class State {
 
-  constructor(pieces=null, enemy_pieces=null, turn=0) {
+  constructor(pieces = null, enemy_pieces = null, turn = 0) {
     this.pieces = (turn) ? pieces : [[5, 9], [7, 9], [9, 9], [5, 7], [9, 7], [1, 3], [5, 3]];
     this.enemy_pieces = (turn) ? enemy_pieces : [[1, 1], [3, 1], [5, 1], [3, 7], [7, 7], [3, 3], [7, 3]];
     this.turn = turn;
@@ -40,21 +37,21 @@ export class State {
       [2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2]
     ];
     for (let i = 0; i < 7; i++) {
-      board[this.pieces[i][0]][this.pieces[i][1]] = (i < 3) ? 3 : 4;
-      board[this.enemy_pieces[i][0]][this.enemy_pieces[i][1]] = (i < 3) ? 5 : 6;
+      board[this.pieces[i][0]][this.pieces[i][1]] = i < 3 ? 3 : 4;
+      board[this.enemy_pieces[i][0]][this.enemy_pieces[i][1]] = i < 3 ? 5 : 6;
     }
     return board;
   }
 
-  legalActions(efficient=false) {
-    let board = this.makeBoard();
-    let stk = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  legalActions(efficient = false) {
+    const board = this.makeBoard();
+    const stk = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let actions = [];
     let parent, current, next_x, next_y, next;
     for (let i = 0; i < 3; i++) {
       stk[0] = this.pieces[i];
-      board[this.pieces[i][0]][this.pieces[i][1]] = i+10;
-      let stk_num = 1
+      board[this.pieces[i][0]][this.pieces[i][1]] = i + 10;
+      let stk_num = 1;
       // 深さ優先探索
       while (stk_num > 0) {
         stk_num -= 1;
@@ -65,15 +62,14 @@ export class State {
             next_x = current[0] + dxy[0];
             next_y = current[1] + dxy[1];
             next = board[next_x][next_y];
-            // タッチできる場合 おかしいかも※※※
-            if (next == 5) {
+            if (next === 5) {
               if (efficient) {
                 actions = [[i, current]];
                 this.win = [[i, current]];
                 return actions;
               }
               else {
-                if (board[current[0]][current[1]] != i+20) {
+                if (board[current[0]][current[1]] !== i + 20) {
                   actions.push([i, current]);
                   this.win.push([i, current]);
                   board[current[0]][current[1]] = i + 20;
@@ -81,24 +77,24 @@ export class State {
                 break;
               }
             }
-            else if (next == i+10) {  // ノードの重複を避ける
+            else if (next === i + 10) {  // ノードの重複を避ける
               break;
             }
-            else if (next == 1 || next == 2 || next == 6) {
+            else if (next === 1 || next === 2 || next === 6) {
               if (current != parent) {
-                if (board[current[0]][current[1]] != i+20) {
+                if (board[current[0]][current[1]] !== i + 20) {
                   actions.push([i, current]);
                   board[current[0]][current[1]] = i + 20;
                 }
               }
               break;
             }
-            else if (next == 3 || next == 4) {
+            else if (next === 3 || next === 4) {
               if (current != parent) {
-                if (board[current[0][current[1]]] != i+20) {
+                if (board[current[0]][current[1]] !== i + 20) {
                   actions.push([i, current]);
                 }
-                board[current[0]][current[1]] = i+10;
+                board[current[0]][current[1]] = i + 10;
                 stk[stk_num] = current;
                 stk_num += 1;
               }
@@ -108,7 +104,7 @@ export class State {
               current = [next_x, next_y];
             }
           }
-        })
+        });
       }
       board[this.pieces[i][0]][this.pieces[i][1]] = 3;
     }
@@ -122,16 +118,16 @@ export class State {
             actions.push([i, [next_x, next_y]]);
           }
         }
-      })
+      });
     }
     return actions;
   }
 
   next(action) {
-    let pieces = this.pieces.concat();
-    let enemy_pieces = this.enemy_pieces.concat();
+    const pieces = this.pieces.concat();
+    const enemy_pieces = this.enemy_pieces.concat();
     pieces[action[0]] = action[1];
-    let next_state = new State (enemy_pieces, pieces, this.turn+1);
+    const next_state = new State(enemy_pieces, pieces, this.turn + 1);
     if (myIncludes(this.win, action)) {
       next_state.lose = true;
     }
@@ -139,7 +135,7 @@ export class State {
   }
 
   isFirstPlayer() {
-    return this.turn % 2 == 0;
+    return this.turn % 2 === 0;
   }
 
   isLose() {
@@ -148,20 +144,20 @@ export class State {
 
   randomAction() {
     const actions = this.legalActions();
-    const rand = Math.floor(Math.random()*actions.length);
+    const rand = Math.floor(Math.random() * actions.length);
     return actions[rand];
   }
 
   evaluationValue() {
     // 相手目線で計算
-    let board = this.makeBoard();
-    let stk = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const board = this.makeBoard();
+    const stk = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let areaNum = 0, checkNum = 0;
     let parent, current, next_x, next_y, next;
     for (let i = 0; i < 3; i++) {
       stk[0] = this.enemy_pieces[i];
-      board[this.enemy_pieces[i][0]][this.enemy_pieces[i][1]] = i+10;
-      let stk_num = 1
+      board[this.enemy_pieces[i][0]][this.enemy_pieces[i][1]] = i + 10;
+      let stk_num = 1;
       // 深さ優先探索
       while (stk_num > 0) {
         stk_num -= 1;
@@ -172,18 +168,18 @@ export class State {
             next_x = current[0] + dxy[0];
             next_y = current[1] + dxy[1];
             next = board[next_x][next_y];
-            if (next == 3) {  // タッチできる場合
+            if (next === 3) {  // タッチできる場合
               checkNum += 1;
             }
-            if (next == i+10) {  // ノードの重複を避ける
+            if (next === i + 10) {  // ノードの重複を避ける
               break;
             }
-            else if (next == 1 || next == 2 || next == 4) {
+            else if (next === 1 || next === 2 || next === 4) {
               break;
             }
-            else if (next == 5 || next == 6) {
+            else if (next === 5 || next === 6) {
               if (current != parent) {
-                board[current[0]][current[1]] = i+10;
+                board[current[0]][current[1]] = i + 10;
                 stk[stk_num] = current;
                 stk_num += 1;
               }
@@ -194,7 +190,7 @@ export class State {
               current = [next_x, next_y];
             }
           }
-        })
+        });
       }
       board[this.enemy_pieces[i][0]][this.enemy_pieces[i][1]] = 5;
     }
@@ -205,18 +201,18 @@ export class State {
         }
       }
     }
-    return areaNum + 4*checkNum + Math.floor(Math.random()*5);
+    return areaNum + 4 * checkNum + Math.floor(Math.random() * 5);
   }
 
   // 王様iの[x,y]までのログを表示
   log([i, [x, y]]) {
-    let board = this.makeBoard();
-    let stk = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    let parentChild = {};
+    const board = this.makeBoard();
+    const stk = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const parentChild = {};
     let parent, current, next_x, next_y, next;
     stk[0] = this.pieces[i];
-    board[this.pieces[i][0]][this.pieces[i][1]] = i+10;
-    let stk_num = 1
+    board[this.pieces[i][0]][this.pieces[i][1]] = i + 10;
+    let stk_num = 1;
     // 深さ優先探索
     while (stk_num > 0) {
       stk_num -= 1;
@@ -227,29 +223,29 @@ export class State {
           next_x = current[0] + dxy[0];
           next_y = current[1] + dxy[1];
           next = board[next_x][next_y];
-          if (next == i+10) {  // ノードの重複を避ける
+          if (next === i + 10) {  // ノードの重複を避ける
             break;
           }
-          else if (next == 5) {  // タッチできる場合は後書きされるよう注意
+          else if (next === 5) {  // タッチできる場合は後書きされるよう注意
             parentChild[current] = parent;
             board[current[0]][current[1]] = i + 20;
             break;
           }
-          else if (next == 1 || next == 2 || next == 6) {
+          else if (next === 1 || next === 2 || next === 6) {
             if (current != parent) {
-              if (board[current[0]][current[1]] != i+20) {
+              if (board[current[0]][current[1]] !== i + 20) {
                 parentChild[current] = parent;
                 board[current[0]][current[1]] = i + 20;
               }
             }
             break;
           }
-          else if (next == 3 || next == 4) {
+          else if (next === 3 || next === 4) {
             if (current != parent) {
-              if (board[current[0][current[1]]] != i+20) {
+              if (board[current[0]][current[1]] !== i + 20) {
                 parentChild[current] = parent;
               }
-              board[current[0]][current[1]] = i+10;
+              board[current[0]][current[1]] = i + 10;
               stk[stk_num] = current;
               stk_num += 1;
             }
@@ -259,13 +255,13 @@ export class State {
             current = [next_x, next_y];
           }
         }
-      })
+      });
     }
     let stopMass = [x, y];
-    let log = [];
+    const log = [];
     while (stopMass) {
       log.push(stopMass);
-      stopMass  = parentChild[stopMass];
+      stopMass = parentChild[stopMass];
     }
     return log.reverse();
   }

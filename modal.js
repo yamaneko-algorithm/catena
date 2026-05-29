@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('ruleModal');
   const openBtn = document.getElementById('openModal');
   const closeBtn = document.getElementById('closeModal');
+  const menuButton = document.querySelector('.toggle-menu-button');
+  const siteMenu = document.querySelector('.header-site-menu');
 
   if (!modal || !openBtn || !closeBtn) {
     console.warn('モーダル用の要素が見つかりません');
@@ -21,11 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.style.display = 'none';
     }
   });
-});
 
-// Hamburger menu
-let button = document.querySelector('.toggle-menu-button');
-let menu = document.querySelector('.header-site-menu');
-button.addEventListener('click', function () {
-  menu.classList.toggle('is-show');
+  menuButton.addEventListener('click', () => {
+    siteMenu.classList.toggle('is-show');
+  });
 });

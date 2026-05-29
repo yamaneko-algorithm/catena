@@ -18,7 +18,7 @@ p {
 
 body {
   font-family: 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN',
-  '游ゴシック', 'Yu Gothic', sans-serif;
+    '游ゴシック', 'Yu Gothic', sans-serif;
 	user-select: none;
   -webkit-tap-highlight-color: transparent;  /* タップしても暗くならない */
 }
@@ -28,6 +28,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 10px;
+  text-align: center;
 }
 
 h4 {
@@ -40,8 +42,7 @@ h4 {
   padding: 5px 10px;
   font-size: 16px;
   font-family: 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN',
-  '游ゴシック', 'Yu Gothic', sans-serif;
-  /* font-weight: bold; */
+    '游ゴシック', 'Yu Gothic', sans-serif;
   background: none;
   border-color: #000;
   color: #000;
@@ -90,16 +91,13 @@ h4 {
   color: red;
 }
 
-.center-box {
-  display: flex;
-  flex-direction: column;     /* 縦並び */
-  align-items: center;        /* 横中央寄せ */
-  padding: 10px;
-  text-align: center;
-}
-
 .mark_yellow {
   background: linear-gradient(transparent 60%, #ffff00 0%);
+}
+
+.rule-list {
+  list-style-type: disc;
+  padding-left: 1.5em;
 }
 
 .menu-board {
@@ -110,7 +108,7 @@ h4 {
 
 .sengo {
   font-family: 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN',
-  '游ゴシック', 'Yu Gothic', sans-serif;
+    '游ゴシック', 'Yu Gothic', sans-serif;
 }
 
 .top-menu,
@@ -219,11 +217,11 @@ h4 {
 .hexagon {
   position: relative;
   margin: 0 -0.96%;
-	height: 100%;
+  height: 100%;
   transform: rotate(90deg);
-	aspect-ratio: 200000 / 173205; /* 正六角形になる比率 */
-	background-color: #333;
-	clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  aspect-ratio: 200000 / 173205; /* 正六角形になる比率 */
+  background-color: #333;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 }
 
 .hexagon::after {
@@ -232,13 +230,12 @@ h4 {
   margin: auto;
   content: '';
   width: 96%;
-	height: 96%;
-	background-color: #fff;
-	clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  height: 96%;
+  background-color: #fff;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 }
 
 .hexagon.move-mass::after {
-  /* animation: flash 1s linear infinite; */
   background-color: rgb(253, 224, 170);
   cursor: pointer;
 }
@@ -264,7 +261,7 @@ h4 {
   margin: auto;
   z-index: 1;
   width: 54%;
-  aspect-ratio: 1 / 1;
+  height: 54%;
   border-radius: 50%;
   background-color: red;
 }
@@ -277,7 +274,7 @@ h4 {
   margin: auto;
   z-index: 1;
   width: 35%;
-  aspect-ratio: 1 / 1;
+  height: 35%;
   border-radius: 50%;
   background-color: red;
 }
@@ -291,7 +288,7 @@ h4 {
   left: 185%;
   margin: auto;
   height: 120%;
-  aspect-ratio: 1 / 3;
+  width: 40%;
   border-radius: 50%;
   background-color: red;
 }
@@ -305,7 +302,7 @@ h4 {
   left: 68%;
   margin: auto;
   height: 150%;
-  aspect-ratio: 100 / 124;
+  width: 121%;
   transform: rotate(-90deg);
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   background-color: red;
@@ -367,15 +364,6 @@ h4 {
   transform: translate(-50%,-50%) rotate(-45deg);
 }
 
-/* @keyframes flash {
-  0%,100% {
-    opacity: 1;
-  }
-  50% {
-    background-color: rgb(253, 224, 170);
-  }
-} */
-
 @media (max-width: 700px) {
 
   .center-box {
@@ -391,7 +379,6 @@ h4 {
     width: 100vw;
     margin: calc((100vh - 100vw - 150px) / 2) auto;  /* safari以外 */
     margin: calc((100dvh - 100vmin - 150px) / 2) auto;
-    /* margin: calc((100dvh - 100vmin - 150px) / 2) auto; */
   }
 
   /* モーダル内容 */

@@ -1,7 +1,5 @@
 'use strict';
 
-// import {State} from './catena.js';
-
 // alphabeta法 + rootNodeでbestActionも返す
 function alphabeta(state, depth, alpha, beta, bestAction) {
   if (state.isLose()) {
@@ -14,7 +12,7 @@ function alphabeta(state, depth, alpha, beta, bestAction) {
   const actions = state.legalActions(true);
   if (state.isFirstPlayer()) {
     for (let i = 0; i < actions.length; i++) {
-      let value = alphabeta(state.next(actions[i]), depth-1, alpha, beta, false);
+      const value = alphabeta(state.next(actions[i]), depth - 1, alpha, beta, false);
       if (value > alpha) {
         alpha = value;
         if (bestAction) {
@@ -29,7 +27,7 @@ function alphabeta(state, depth, alpha, beta, bestAction) {
   }
   else {
     for (let i = 0; i < actions.length; i++) {
-      let value = alphabeta(state.next(actions[i]), depth-1, alpha, beta, false);
+      const value = alphabeta(state.next(actions[i]), depth - 1, alpha, beta, false);
       if (value < beta) {
         beta = value;
         if (bestAction) {
