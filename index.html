@@ -12,7 +12,7 @@
   <script src="main.js" type="module" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -71,26 +71,26 @@
     </div>
     <div class="menu-board">
       <div class="top-menu">
-        <div class="sengo">
-          <label class="radio-label">
-            <input type="radio" class="sengo-" name="sengo" value="1" checked>先手
-          </label>
-          <label class="radio-label">
-            <input type="radio" class="sengo-" name="sengo" value="2">後手
-          </label>
+        <div class="seg">
+          <input type="radio" name="sengo" value="1" id="sente" checked>
+          <label for="sente" class="seg-label">先手</label>
+          <input type="radio" name="sengo" value="2" id="gote">
+          <label for="gote" class="seg-label">後手</label>
         </div>
-        <div class="level">
-          <input class="level-input hidden-visually" type="radio" id="5-star" name="level" value="5">
-          <label class="level-label" for="5-star"><span class="level-icon"></span><span class="hidden-visually"></span></label>
-          <input class="level-input hidden-visually" type="radio" id="4-star" name="level" value="4">
-          <label class="level-label" for="4-star"><span class="level-icon"></span><span class="hidden-visually"></span></label>
-          <input class="level-input hidden-visually" type="radio" id="3-star" name="level" value="3">
-          <label class="level-label" for="3-star"><span class="level-icon"></span><span class="hidden-visually"></span></label>
-          <input class="level-input hidden-visually" type="radio" id="2-star" name="level" value="2">
-          <label class="level-label" for="2-star"><span class="level-icon"></span><span class="hidden-visually"></span></label>
-          <input class="level-input hidden-visually" type="radio" id="1-star" name="level" value="1" checked>
-          <label class="level-label" for="1-star"><span class="level-icon"></span><span class="hidden-visually"></span></label>
-          <div class="cpu-lv">CPU Lv.</div>
+        <div class="level-group">
+          <span class="seg-caption">CPU Lv.</span>
+          <div class="seg">
+            <input type="radio" name="level" value="1" id="lv1" checked>
+            <label for="lv1" class="seg-label">1</label>
+            <input type="radio" name="level" value="2" id="lv2">
+            <label for="lv2" class="seg-label">2</label>
+            <input type="radio" name="level" value="3" id="lv3">
+            <label for="lv3" class="seg-label">3</label>
+            <input type="radio" name="level" value="4" id="lv4">
+            <label for="lv4" class="seg-label">4</label>
+            <input type="radio" name="level" value="5" id="lv5">
+            <label for="lv5" class="seg-label">5</label>
+          </div>
         </div>
         <div class="turn">1 turn</div>
       </div>

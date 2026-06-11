@@ -1,5 +1,14 @@
 @charset "utf-8";
 
+:root {
+  --ink: #222222;
+  --paper: #ffffff;
+  --bg: #ffffff;
+  --muted: #8a8a8a;
+  --seg-track: #ebebeb;
+  --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
 *,
 ::before,
 ::after {
@@ -19,6 +28,8 @@ p {
 body {
   font-family: 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN',
     '游ゴシック', 'Yu Gothic', sans-serif;
+  color: var(--ink);
+  background-color: var(--bg);
 	user-select: none;
   -webkit-tap-highlight-color: transparent;  /* タップしても暗くならない */
 }
@@ -39,18 +50,23 @@ h4 {
 
 #openModal {
   margin-top: 10px;
-  padding: 5px 10px;
-  font-size: 16px;
+  padding: 6px 18px;
+  font-size: 15px;
   font-family: 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN',
     '游ゴシック', 'Yu Gothic', sans-serif;
-  background: none;
-  border-color: #000;
-  color: #000;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
   cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: background-color 0.2s, color 0.2s, transform 0.15s;
 }
 
 #openModal:hover {
-  background-color: #DCDDDD;
+  background-color: var(--ink);
+  color: var(--paper);
+  transform: translateY(-1px);
 }
 
 /* モーダル背景 */
@@ -62,19 +78,23 @@ h4 {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
 }
 
 /* モーダル内容 */
 .modal-content {
-  background-color: white;
+  background-color: var(--paper);
   margin: 10% auto;
   padding: 30px 15px;
-  border-radius: 10px;
+  border-radius: 14px;
   width: 90%;
   max-width: 750px;
+  max-height: 85svh;
+  overflow-y: auto;
   position: relative;
   text-align: left;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
 }
 
 /* 閉じるボタン */
@@ -106,96 +126,119 @@ h4 {
   font-family: "Montserrat", sans-serif;
 }
 
-.sengo {
-  font-family: 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN',
-    '游ゴシック', 'Yu Gothic', sans-serif;
-}
-
-.top-menu,
-.bottom-menu {
+/* 先後・CPUレベル（セグメントコントロール） */
+.top-menu {
   width: 100%;
-  height: 50px;
-  font-size: 30px;
   display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 4px;
+  margin-bottom: 8px;
 }
 
-.sengo {
-  margin-top: auto;
-  margin-bottom: 2px;
-  margin-left: 8px;
-  font-size: 20px;
+.seg {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: var(--seg-track);
+  border-radius: 999px;
 }
 
-.radio-label, input[type="radio"] {
+.seg input {
+  display: none;
+}
+
+.seg-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
   cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-.sengo-::before{
-  border: 1px solid #2196f3;
-}
-.sengo-::after{
-  background-color: #2196f3;
-}
-
-/* ★レベル */
-.level {
-  margin-top: auto;
-  margin-left: 20px;
-  font-size: 20px;
-  display: inline-flex;
-  flex-direction: row-reverse;
+.seg input:checked + .seg-label {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
 }
 
-.hidden-visually {
-  border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+.level-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.level-label {
-  cursor: pointer;
-  color: gray;
-  padding-left: 2px;
-  padding-right: 2px;
-}
-
-.level-icon::before {
-  content: "★";
-  font-size: 26px;
-}
-
-.level-input:hover ~ .level-label {
-  color: lightgray;
-}
-
-.level-input:checked ~ .level-label {
-  color: #ffbb00;
-}
-
-.cpu-lv {
-  margin: auto 2px 4px 0;
+.seg-caption {
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
 }
 
 .turn {
-  margin: auto 8px 2px auto;
+  margin-left: auto;
+  margin-right: 4px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--muted);
 }
 
 .bottom-menu {
+  width: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
+  gap: 24px;
+  margin-top: 14px;
 }
 
 .play,
 .reset {
-  width: 150px;
+  width: 140px;
+  padding: 10px 0;
   text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
   cursor: pointer;
+  user-select: none;
+  box-shadow: var(--shadow-soft);
+  transition: background-color 0.2s, color 0.2s, transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.play {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.reset {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.play:hover,
+.reset:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.play:active,
+.reset:active {
+  transform: translateY(1px);
+  box-shadow: none;
 }
 
 .board {
@@ -205,6 +248,8 @@ h4 {
   display: flex;
   flex-flow: column;
   justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .hexagons {
@@ -320,8 +365,8 @@ h4 {
   line-height: 70px;
   background-color: #fff;
   font-size: 18pt;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.28);
   position: absolute;
   left: 0;
   right: 0;
@@ -406,31 +451,32 @@ h4 {
     font-size: 14px;
   }
 
-  .sengo,
-  .level {
+  .top-menu {
+    gap: 6px;
+    padding: 0 6px;
+  }
+
+  .seg-label {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .seg-caption {
+    font-size: 11px;
+  }
+
+  .level-group {
+    gap: 4px;
+  }
+
+  .turn {
     font-size: 14px;
-  }
-
-  .level {
-    margin-left: 14px;
-  }
-
-  .level-icon::before {
-    font-size: 20px;
-  }
-
-  .level-label {
-    padding-left: 1.5px;
-    padding-right: 1.5px;
-  }
-
-  .top-menu,
-  .bottom-menu {
-    font-size: 20px;
   }
 
   .play,
   .reset {
-    width: 100px;
+    width: 110px;
+    padding: 8px 0;
+    font-size: 14px;
   }
 }
