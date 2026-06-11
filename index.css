@@ -187,9 +187,9 @@ h4 {
   margin-left: auto;
   margin-right: 4px;
   font-family: "Montserrat", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--muted);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
 }
 
 .bottom-menu {
@@ -408,19 +408,14 @@ h4 {
 
 @media (max-width: 700px) {
 
+  /* 絶対配置の重ね合わせをやめて通常フローで縦に並べる（文字被り防止） */
   .center-box {
     margin-top: 5px;
-    position: absolute;
-    width: 100vw;
-    z-index: 2;
   }
 
   .menu-board {
-    position: absolute;
-    z-index: 1;
     width: 100vw;
-    margin: calc((100vh - 100vw - 150px) / 2) auto;  /* safari以外 */
-    margin: calc((100dvh - 100vmin - 150px) / 2) auto;
+    margin: 10px auto 0;
   }
 
   /* モーダル内容 */
@@ -454,6 +449,7 @@ h4 {
   .top-menu {
     gap: 6px;
     padding: 0 6px;
+    margin-bottom: 4px;
   }
 
   .seg-label {
@@ -470,7 +466,7 @@ h4 {
   }
 
   .turn {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .play,
