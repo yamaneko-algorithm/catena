@@ -408,14 +408,21 @@ h4 {
 
 @media (max-width: 700px) {
 
-  /* 絶対配置の重ね合わせをやめて通常フローで縦に並べる（文字被り防止） */
   .center-box {
     margin-top: 5px;
+    position: absolute;
+    width: 100vw;
+    z-index: 2;
   }
 
   .menu-board {
+    position: absolute;
+    z-index: 1;
     width: 100vw;
-    margin: 10px auto 0;
+    /* メニュー込みブロックを画面中央に配置。
+       極端に縦が短い端末のみ下限84pxで説明文との被りを回避 */
+    margin: max(calc((100vh - 100vmin - 158px) / 2), 92px) auto;  /* safari以外 */
+    margin: max(calc((100dvh - 100vmin - 158px) / 2), 92px) auto;
   }
 
   /* モーダル内容 */
@@ -447,22 +454,27 @@ h4 {
   }
 
   .top-menu {
-    gap: 6px;
+    gap: 5px;
     padding: 0 6px;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
+  }
+
+  .seg {
+    padding: 2px;
+    gap: 1px;
   }
 
   .seg-label {
-    padding: 4px 8px;
-    font-size: 12px;
-  }
-
-  .seg-caption {
+    padding: 3px 7px;
     font-size: 11px;
   }
 
+  .seg-caption {
+    font-size: 10px;
+  }
+
   .level-group {
-    gap: 4px;
+    gap: 3px;
   }
 
   .turn {
